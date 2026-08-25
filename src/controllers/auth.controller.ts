@@ -27,11 +27,22 @@ const registrationController = async (
   }
 };
 const loginController = async (req: Request, res: Response) => {
-    try {
-       
-    } catch (error) {
-      
-    }
+  try {
+    const result = await authService.loginService(req.body)
+    res.cookie("token", result?.token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+    return res.status(HttpStatus.OK).json({
+      success: true,
+      message: MESSAGES.AUTH.LOGIN_SUCCESS,
+      data: result?.user,
+    });
+  } catch (error) {
+
+  }
 }
 
 export default {

@@ -5,3 +5,7 @@ export interface IRegistrationData {
   phone?: string;
   role?: "CUSTOMER" | "TECHNICIAN";
 }
+export interface ILoinData {
+  email: string,
+  password: string
+}
