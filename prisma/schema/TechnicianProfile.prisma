@@ -1,0 +1,14 @@
+model TechnicianProfile{
+    id              String @id @default(uuid())
+    user_id         String @unique
+    bio             String?
+    experienceYears Int?
+    isVerified      Boolean  @default(false)
+    isAvailable     Boolean  @default(true)
+    averageRating   Decimal  @default(0) @db.Decimal(3, 2)
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+    user            Users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@map("TechnicianProfile")
+}
