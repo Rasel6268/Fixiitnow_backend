@@ -4,11 +4,11 @@
   "description": "RESTful API backend for the FixItNow home services platform",
   "main": "server.ts",
   "scripts": {
-  "start": "node dist/server.js",
-  "dev": "tsx watch src/server.ts",
-  "build": "tsc",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "fixitnow",
     "express",
