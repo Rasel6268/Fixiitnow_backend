@@ -3,7 +3,7 @@ import express,{ Application, Request, Response } from "express";
 import cors from "cors"
 import config from "./config";
 
-import registration  from './routers/users.route'
+import authRouter from "./routers/users.route";
 
 const app : Application = express()
 
@@ -33,7 +33,7 @@ app.get('/', (req: Request, res: Response) => {
 //Routers
 //User 
 
-app.use("/api/auth",registration)
+app.use("/api/auth",authRouter)
 
 
 export default app

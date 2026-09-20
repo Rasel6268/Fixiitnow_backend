@@ -1,9 +1,8 @@
 import bcrypt from "bcryptjs";
 import MESSAGES from "../constants/messages";
 import { prisma } from "../lib/prisma";
-import { ILoinData, IRegistrationData } from "../types/auth.types";
+import { ILoginData, IRegistrationData } from "../types/auth.types";
 import config from "../config";
-import { error } from "node:console";
 import jwt from "jsonwebtoken";
 const registration = async (userData: IRegistrationData) => {
     try {
@@ -24,12 +23,6 @@ const registration = async (userData: IRegistrationData) => {
                 password: hasedPassword,
                 phone,
                 role,
-                // ...(role === "TECHNICIAN" && {
-                //     technicianProfile: {
-                //         create: {}
-                //     }
-                // })
-
             },
             omit: {
                 password: true
@@ -57,12 +50,12 @@ const registration = async (userData: IRegistrationData) => {
         })
 
 
-        return new_user
+        return userWithProfile
     } catch (error) {
-
+       throw error;
     }
 };
-const loginService = async (loginData: ILoinData) => {
+const loginService = async (loginData: ILoginData) => {
     try {
         const { email, password } = loginData
 
@@ -93,8 +86,7 @@ const loginService = async (loginData: ILoinData) => {
                 expiresIn: "7d",
             }
         );
-        console.log(token);
-
+    
         return {
             token,
             user: {
@@ -106,12 +98,12 @@ const loginService = async (loginData: ILoinData) => {
             },
         };
     } catch (error) {
-
+       throw (error)
     }
 }
-
-
 export default {
     registration,
-    loginService
+    loginService,
+    
+    
 }
